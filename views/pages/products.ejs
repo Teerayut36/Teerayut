@@ -5,6 +5,7 @@
              <th>ID</th>
              <th>Title</th>
              <th>Price</th>
+             <th></th>
          </tr>
      </thead>
      <tbody>
@@ -13,6 +14,7 @@
              <td scope="row"><%=product.id %></td>
              <td><%=product.title %></td>
              <td><%=product.price %></td>
+             <td><a name="" id="" class="btn btn-dark" href="/products/<%=product.id %>" role="button">Edit</a></td>
          </tr>
          <% }); %>
      </tbody>
