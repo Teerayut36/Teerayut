@@ -121,9 +121,29 @@ app.get('/products_delete', function (req, res) {
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
-
+ })
+});
+//insert
+app.get('/insert',function (req, res) {
+    res.render('pages/insert'); 
+})
+app.post('/products/insert', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var price = req.body.price;
+    var sql = `INSERT INTO products (id,title,price)
+    VALUES ('${id}', '${title}', '${price}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/products')
         })
 
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
 });
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
