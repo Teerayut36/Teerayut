@@ -5,7 +5,7 @@ var db = pgp('postgres://snzadxroisaukx:adf58423ee26b3ecd30a3e8f1076764acc2365d3
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /////app.use(express.static('static'));
 ////app.use(express.static('static/about.html'));
@@ -40,21 +40,20 @@ app.get('/products', function (req, res) {
 
 });
 app.get('/products/:pid', function (req, res) {
-   var pid =req.params.pid;
-   var sql = "select * from products where id=" + pid;
-   db.any(sql)
+    var pid = req.params.pid;
+    var sql = "select * from products where id=" + pid;
+    db.any(sql)
         .then(function (data) {
-             res.render('pages/products_edit', { products: data[0] })
+            res.render('pages/products_edit', { products: data[0] })
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
 
-        }) 
-   });
-app.get('/users/:id', function (req, res) {
-    var id = req.param ('id');
-    var sql = 'select * from users';
-
+        })
+});
+app.get('/users', function (req, res) {
+    var id = req.params.id;
+    var sql = 'select * from users ';
     if (id) {
         sql += ' where id =' + id;
     }
@@ -62,32 +61,57 @@ app.get('/users/:id', function (req, res) {
         .then(function (data) {
             console.log('DATA:' + data);
             res.render('pages/users', { users: data })
+
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
 
         })
+});
+app.get('/users', function (req, res) {
+    var id = req.params.pid;
+    var sql = "select * from users where id =" + pid;
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/users_edit', { users: data[0] })
 
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+
+        })
 });
 app.get('/index', function (req, res) {
     res.render('pages/index');
 });
 ///update
-app.post('/products/update' ,function (req, res){
-  var id = req.body.id;
-  var title = req.body.title;
-  var price = req.body.price;
-  var sql = `update product set title = ${title},price = ${price} where id = ${id} ` ;
-  ////db.none
-  console.log('UPDATE:' + sql);
-  res.redirect('/products');
+app.post('/products/update', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.title;
+    var price = req.body.price;
+    var sql = `update products set title = '${title}',price = '${price}' where id = ${id} `;
+    ////db.none
+    db.none(sql);
+    console.log('UPDATE:' + sql);
+    res.redirect('/products');
 
 
 });
+app.post('/users/update', function (req, res) {
+    var id = req.body.id;
+    var email = req.body.email;
+    var password = req.body.password;
+    var sql = `update users set email = ${email},password = ${password} where id = ${id} `;
+    ////db.none
+    console.log('UPDATE:' + sql);
+    res.redirect('/users');
 
+
+});
 var port = process.env.PORT || 8080;
-app.listen(port, function() {
-console.log('App is running on http://localhost:' + port);
+app.listen(port, function () {
+    console.log('App is running on http://localhost:' + port);
 });
 
 
