@@ -25,10 +25,10 @@ app.get('/products', function (req, res) {
     var sql = 'select * from products';
 
     if (id) {
-        sql += ' where id =' + id;
+        sql += ' where id =' + id +' order by id ASC';
     }
 
-    db.any(sql)
+    db.any(sql +' order by id ASC')
         .then(function (data) {
             console.log('DATA:' + data);
             res.render('pages/products', { products: data })
@@ -95,8 +95,6 @@ app.post('/products/update', function (req, res) {
     db.none(sql);
     console.log('UPDATE:' + sql);
     res.redirect('/products');
-
-
 });
 app.post('/users/update', function (req, res) {
     var id = req.body.id;
@@ -106,7 +104,25 @@ app.post('/users/update', function (req, res) {
     ////db.none
     console.log('UPDATE:' + sql);
     res.redirect('/users');
+});
+//delete
+app.get('/products_delete', function (req, res) {
+    var id = req.param('id');
+    var sql = 'Delete * from products';
 
+    if (id) {
+        sql += ' where id =' + id;
+    }
+
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.render('pages/products', { products: data })
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+
+        })
 
 });
 var port = process.env.PORT || 8080;
