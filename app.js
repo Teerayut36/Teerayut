@@ -166,7 +166,7 @@ app.post('/users/insertuser', function (req, res) {
 });
 //date
 app.get('/insert', function (req, res) {
-    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    var time = moment().format();
     res.render('pages/insert',{ time: time});
 });
 var port = process.env.PORT || 8080;
