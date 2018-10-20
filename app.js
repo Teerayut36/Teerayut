@@ -106,23 +106,23 @@ app.post('/users/update', function (req, res) {
     res.redirect('/users');
 });
 //delete
-app.get('/products_delete', function (req, res) {
-    var id = req.param('id');
-    var sql = 'Delete * from products';
-
-    if (id) {
-        sql += ' where id =' + id;
+app.get('/product_delete/:pid',function (req, res) {
+    var id = req.params.pid;
+    var sql = 'DELETE FROM products';
+    if (id){
+            sql += ' where id ='+ id;
     }
-
     db.any(sql)
-        .then(function (data) {
-            console.log('DATA:' + data);
-            res.render('pages/products', { products: data })
+        .then(function(data){
+            console.log('DATA:'+data);
+            res.redirect('/products');
+    
         })
-        .catch(function (error) {
-            console.log('ERROR:' + error);
- })
-});
+        .catch(function(data){
+                console.log('ERROR:'+console.error);
+                
+    })
+ });
 //insert
 app.get('/insert',function (req, res) {
     res.render('pages/insert'); 
