@@ -55,9 +55,9 @@ app.get('/users', function (req, res) {
     var id = req.params.id;
     var sql = 'select * from users ';
     if (id) {
-        sql += ' where id =' + id;
+        sql += ' where id =' + id +' order by id ASC';
     }
-    db.any(sql)
+    db.any(sql +' order by id ASC')
         .then(function (data) {
             console.log('DATA:' + data);
             res.render('pages/users', { users: data })
@@ -146,8 +146,8 @@ app.post('/products/insert', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-app.get('/insert',function (req, res) {
-    res.render('pages/insert'); 
+app.get('/insertuser',function (req, res) {
+    res.render('pages/insertuser'); 
 })
 app.post('/users/insertuser', function (req, res) {
     var id = req.body.id;
