@@ -126,9 +126,7 @@ app.get('/product_delete/:pid',function (req, res) {
     })
  });
 //insert
-app.get('/insert',function (req, res) {
-    res.render('pages/insert'); 
-})
+
 app.post('/products/insert', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
@@ -147,9 +145,7 @@ app.post('/products/insert', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-app.get('/insertuser',function (req, res) {
-    res.render('pages/insertuser'); 
-})
+
 app.post('/users/insertuser', function (req, res) {
     var id = req.body.id;
     var title = req.body.email;
@@ -171,7 +167,7 @@ app.post('/users/insertuser', function (req, res) {
 //date
 app.get('/insert', function (req, res) {
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
-    res.render('pages/insert)', { time: time});
+    res.render('pages/insert',{ time: time});
 });
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
