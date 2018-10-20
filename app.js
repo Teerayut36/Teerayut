@@ -100,8 +100,9 @@ app.post('/users/update', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
-    var sql = `update users set email = ${email},password = ${password} where id = ${id} `;
+    var sql = `update users set email = '${email}',password = '${password}' where id = ${id} `;
     ////db.none
+    db.none(sql);
     console.log('UPDATE:' + sql);
     res.redirect('/users');
 });
@@ -139,6 +140,27 @@ app.post('/products/insert', function (req, res) {
         .then(function (data) {
             console.log('DATA:' + data);
             res.redirect('/products')
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
+app.get('/insert',function (req, res) {
+    res.render('pages/insert'); 
+})
+app.post('/users/insertuser', function (req, res) {
+    var id = req.body.id;
+    var title = req.body.email;
+    var price = req.body.password;
+    var sql = `INSERT INTO users (id,email,password)
+    VALUES ('${id}', '${email}', '${password}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users')
         })
 
         .catch(function (error) {
