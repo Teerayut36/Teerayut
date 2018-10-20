@@ -168,7 +168,7 @@ app.post('/users/insertuser', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-//data
+//date
 app.get('/insert', function (req, res) {
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     res.render('pages/insert)', { time: time});
