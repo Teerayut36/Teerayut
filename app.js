@@ -4,6 +4,7 @@ var pgp = require('pg-promise')();
 var db = pgp('postgres://snzadxroisaukx:adf58423ee26b3ecd30a3e8f1076764acc2365d3cd4eb0899a2d6c4d4c18cd8d@ec2-54-243-147-162.compute-1.amazonaws.com:5432/dbvugdbvctd4pk?ssl=true');
 var app = express();
 var bodyParser = require('body-parser');
+var moment = require('moment');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -166,6 +167,11 @@ app.post('/users/insertuser', function (req, res) {
         .catch(function (error) {
             console.log('ERROR:' + error);
         })
+});
+//data
+app.get('/insert', function (req, res) {
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    res.render('pages/insert)', { time: time});
 });
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
