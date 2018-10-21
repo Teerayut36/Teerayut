@@ -125,6 +125,23 @@ app.get('/product_delete/:pid',function (req, res) {
                 
     })
  });
+ app.get('/user_delete/:pid',function (req, res) {
+    var id = req.params.pid;
+    var sql = 'DELETE FROM users';
+    if (id){
+            sql += ' where id ='+ id;
+    }
+    db.any(sql)
+        .then(function(data){
+            console.log('DATA:'+data);
+            res.redirect('/users');
+    
+        })
+        .catch(function(data){
+                console.log('ERROR:'+console.error);
+                
+    })
+ });
 //insert
 
 app.post('/products/insert', function (req, res) {
@@ -146,7 +163,7 @@ app.post('/products/insert', function (req, res) {
         })
 });
 
-app.post('/users/insertuser', function (req, res) {
+app.post('/users/insert', function (req, res) {
     var id = req.body.id;
     var title = req.body.email;
     var price = req.body.password;
