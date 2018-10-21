@@ -203,7 +203,7 @@ app.get('/product_report', function (req, res) {
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
-            res.render('pages/report_product', { products: data })
+            res.render('pages/product_report', { products: data })
 
         })
         .catch(function (error) {
@@ -216,7 +216,7 @@ app.get('/users_report', function (req, res) {
     db.any('select * from users ORDER BY  email ASC', )
         .then(function (data) {
             console.log('DATA' + data);
-            res.render('pages/report_user', { users: data })
+            res.render('pages/users_report', { users: data })
 
         })
         .catch(function (error) {
