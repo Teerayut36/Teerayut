@@ -69,8 +69,8 @@ app.get('/users', function (req, res) {
 
         })
 });
-app.get('/users', function (req, res) {
-    var id = req.params.pid;
+app.get('/users/:pid', function (req, res) {
+    var pid = req.params.pid;
     var sql = "select * from users where id =" + pid;
     db.any(sql)
         .then(function (data) {
