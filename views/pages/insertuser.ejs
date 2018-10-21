@@ -1,23 +1,33 @@
 <% include ../partials/header %>
- <form action="/users/insert" method="post">
- <div class="form-group">
-   <label for="">ID</label>
-   <input type="number"
-     class="form-control" value="<%= users.id %>" name="id" id="" aria-describedby="helpId" placeholder=""value="">
-   <small id="helpId" class="form-text text-muted">user ID</small>
- </div>
-<div class="form-group">
-   <label for="">Email</label>
-   <input type="text"
-     class="form-control" value="<%= users.email %>" name="title" id="" aria-describedby= "helpId" placeholder=""value="">
-   <small id="helpId" class="form-text text-muted">user Email</small>
- </div>
- <div class="form-group">
-   <label for="">Password</label>
-   <input type="number"
-     class="form-control" value="<%= users.password %>" name="price" id="" aria-describedby="helpId" placeholder=""value="">
-   <small id="helpId" class="form-text text-muted">user Password</small>
- </div>
+ <form action="/users/insertuser" method="post">
+  <div class="form-group">
+  <label for="id">ID</label>
+  <input type="number"
+    class="form-control" name="id" id="" aria-describedby="helpId" placeholder=""value="">
+  <small id="helpId" class="form-text text-muted"> ID</small>
+</div>
+
+  <div class="form-group">
+    <label for="email">email</label>
+    <input type="text"
+      class="form-control" name="email" id="" aria-describedby="helpId" placeholder=""value="">
+    <small id="helpId" class="form-text text-muted">Email</small>
+  </div>
+
+  <div class="form-group">
+    <label for="password">password</label>
+    <input type="text"
+      class="form-control" name="password" id="" aria-describedby="helpId" placeholder=""value="">
+    <small id="helpId" class="form-text text-muted">Password</small>
+    </div>
+    
+
+    <div class="form-group">
+        <label for="">Time</label>
+        <input type="text" class="form-control" value="<%= time %>" name="time" id="" aria-describedby="helpId" placeholder="" >
+        <small id="helpId" class="form-text text-muted">Time</small>
+      </div>
+
 <button type="submit" class="btn btn-primary">Save</button>
 </form>
 <% include ../partials/footer %>
