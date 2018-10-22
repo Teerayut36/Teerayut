@@ -213,7 +213,7 @@ app.get('/product_report', function (req, res) {
 });
 
 app.get('/users_report', function (req, res) {
-    db.any('select * from users ORDER BY  ID ASC', )
+    db.any('select * from users ORDER BY  email ASC', )
         .then(function (data) {
             console.log('DATA' + data);
             res.render('pages/users_report', { users: data })
