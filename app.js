@@ -196,7 +196,7 @@ app.get('/insertuser', function (req, res) {
 //report 
 app.get('/product_report', function (req, res) {
     var id = req.param('id');
-    var sql = 'select* from products ORDER BY Price DESC limit 10';
+    var sql = 'select* from products ORDER BY ID ASC ';
     if (id) {
         sql += ' where id =' + id;
     }
@@ -213,7 +213,7 @@ app.get('/product_report', function (req, res) {
 });
 
 app.get('/users_report', function (req, res) {
-    db.any('select * from users ORDER BY  email ASC', )
+    db.any('select * from users ORDER BY  ID ASC', )
         .then(function (data) {
             console.log('DATA' + data);
             res.render('pages/users_report', { users: data })
