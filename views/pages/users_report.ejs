@@ -2,25 +2,71 @@
 <div class="jumbotron">
  <br>
  <h2>Report User</h2>
+<canvas id="bar-chart" width="800" height="450"></canvas>
 <table class="table">
     <thead>
-       <tr  class="bg-secondary">
+        <tr class="bg-secondary">
             <th>Customers ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Total Sales</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="myTable">
     <% user.forEach(function(user) { %>
         <tr>
-            <td scope="row"><font color="blue"><%= user.user_id %></td>
-            <td><font color="blue"><%= user.name %></td>
-            <td><font color="blue"><%= user.email %></td>
+            <td scope="row"><%= user.user_id %></td>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
             <td>$<%= user.price %></td>
         </tr>
         <% }); %>
     </tbody>
 </table>
-</div>
-  <% include ../partials/footer %>
+
+ </div>
+ <script>
+<%
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+ 
+var labelss=[]
+var data=[]
+var color=[]
+user.forEach(function(user) { 
+    var colors =getRandomColor()
+    labelss.push("'" + user.name + "'");
+    color.push("'" +colors + "'");
+    data.push(user.price);
+}); %>
+
+new Chart(document.getElementById("bar-chart"), {
+    type: 'bar',
+    data: {
+      labels:[<%-labelss%>], 
+      
+      datasets:[{
+          label: "๊users",
+                backgroundColor: [<%-color%>],   
+          data:  [<%=data%>]
+        }]
+      
+     
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
+</script>
+<% include ../partials/footer %>
